@@ -7,7 +7,7 @@ const user = {
   email: "akarsh@gmail.com",
   name: "Akarsh"
 }
-
+const challengeBuffer = encoder.encode("34914012789326781858713765455437");
 const openLogin = async () => {
   const isAvailable = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
 
@@ -23,7 +23,6 @@ const openLogin = async () => {
 
   let publicKeyCredential;
   const userIdBuffer = encoder.encode(user.id.toString());
-  const challengeBuffer = encoder.encode("34914012789326781858713765455437");
   const options = {
       publicKey: {
           rp: { name: window.location.host },
