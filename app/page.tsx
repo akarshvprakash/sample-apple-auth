@@ -4,7 +4,7 @@ const encoder = new TextEncoder();
 
 const user = {
   id: 1054,
-  email: "+91 88912 83406",
+  email: "rahul1rama@gmail.com",
   name: "Akarsh V"
 }
 const challengeBuffer = encoder.encode("34914012789326781858713765455437");
@@ -44,7 +44,7 @@ const openLogin = async () => {
       publicKeyCredential = await navigator.credentials.create(options);
       // Handle the created credential as needed
       localStorage.setItem("credentialId", publicKeyCredential.id);
-      if(localStorage.getItem("credentialId")) alert("CredentialId Saved !!!");
+      if(localStorage.getItem("credentialId")) alert("Credential Id Saved - "+localStorage.getItem("credentialId"));
   } catch (error) {
       console.error('Error creating credential:', error);
       // Handle errors appropriately
@@ -65,7 +65,7 @@ const openAuth = async () => {
           }]
       }
     };
-
+    alert("auth starting - "+credentialId);
     const publicKeyCredential = await navigator.credentials.get(options);
     alert("Authenticate !!!");
   } else {
