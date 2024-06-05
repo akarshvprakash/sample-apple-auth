@@ -34,9 +34,11 @@ const openLogin = async () => {
           pubKeyCredParams: [{ type: "public-key", alg: -7 }],
           challenge: challengeBuffer,
           authenticatorSelection: {
-            authenticatorAttachment: 'platform'
+            authenticatorAttachment: 'platform',
+            requiredResidentKey: false,
+            userVerification: 'required'
           },
-          attestation: "direct"
+          attestation: "none"
       }
   };
   try {
@@ -62,7 +64,8 @@ const openAuth = async () => {
               type: "public-key",
               id: credentialIdBuffer,
               transports: ["internal"]
-          }]
+          }],
+        userVerification: 'required'
       }
     };
     alert("auth starting - "+credentialId);
