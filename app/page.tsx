@@ -54,7 +54,7 @@ export default function Home() {
     }
   }
 
-  const openAuth = () => {
+  const openAuth = async () => {
     const credentialId =  localStorage.getItem("credentialId");
     if(credentialId) {
       const credentialIdBuffer = encoder.encode(credentialId);
