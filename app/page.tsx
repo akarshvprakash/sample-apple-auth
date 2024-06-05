@@ -4,7 +4,7 @@ const encoder = new TextEncoder();
 
 const user = {
   id: 1054,
-  email: "akarsh@gmail.com",
+  email: "akarshvprakash@gmail.com",
   name: "Akarsh"
 }
 const challengeBuffer = encoder.encode("34914012789326781858713765455437");
