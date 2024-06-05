@@ -27,9 +27,9 @@ const openLogin = async () => {
       publicKey: {
           rp: { name: window.location.host },
           user: {
-              name: user.name,
+              name: user.email,
               id: userIdBuffer,
-              displayName: user.email
+              displayName: user.name
           },
           pubKeyCredParams: [{ type: "public-key", alg: -7 }],
           challenge: challengeBuffer,
@@ -37,7 +37,7 @@ const openLogin = async () => {
             authenticatorAttachment: 'platform',
             userVerification: 'required'
           },
-          attestation: "direct"
+          attestation: "none"
       }
   };
   try {
