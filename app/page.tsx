@@ -5,7 +5,7 @@ const encoder = new TextEncoder();
 const user = {
   id: 1054,
   email: "akarshvprakash@gmail.com",
-  name: "Akarsh"
+  name: "Akarsh V"
 }
 const challengeBuffer = encoder.encode("34914012789326781858713765455437");
 const openLogin = async () => {
