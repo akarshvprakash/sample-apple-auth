@@ -37,7 +37,7 @@ const openLogin = async () => {
             authenticatorAttachment: 'platform',
             userVerification: 'required'
           },
-          attestation: "direct"
+          // attestation: "direct"
       }
   };
   try {
