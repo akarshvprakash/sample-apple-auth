@@ -4,7 +4,7 @@ const encoder = new TextEncoder();
 
 const user = {
   id: 1054,
-  email: "akarshvprakash@gmail.com",
+  email: "+91 88912 83406",
   name: "Akarsh V"
 }
 const challengeBuffer = encoder.encode("34914012789326781858713765455437");
@@ -25,7 +25,7 @@ const openLogin = async () => {
   const userIdBuffer = encoder.encode(user.id.toString());
   const options = {
       publicKey: {
-          rp: { name: window.location.host },
+          rp: { name: window.location.host, id: window.location.host },
           user: {
               name: user.email,
               id: userIdBuffer,
@@ -34,10 +34,9 @@ const openLogin = async () => {
           pubKeyCredParams: [{ type: "public-key", alg: -7 }],
           challenge: challengeBuffer,
           authenticatorSelection: {
-            authenticatorAttachment: 'platform',
-            userVerification: 'required'
+            authenticatorAttachment: 'platform'
           },
-          attestation: "none"
+          attestation: "direct"
       }
   };
   try {
