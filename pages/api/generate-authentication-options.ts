@@ -8,11 +8,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const result = await pool.query('SELECT credentialID FROM profiles WHERE username = $1', [username]);
   const user = result.rows[0];
 
-  console.log("user.credentialID", user.credentialID)
+  console.log("user.credentialid", user.credentialid)
 
   const options = generateAuthenticationOptions({
     allowCredentials: [{
-      id: user.credentialID,
+      id: user.credentialid,
       type: 'public-key',
     }],
   });
