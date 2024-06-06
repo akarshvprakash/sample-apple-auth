@@ -18,12 +18,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   console.log("verification", verification);
 
-  if (verification.verified) {
+  if (verification.verified && verification.registrationInfo) {
     const { username } = req.body;
-    // const { credentialPublicKey, counter, credentialID, transports } = verification.registrationInfo;
+    const { credentialPublicKey, counter, credentialID, attestationObject } = verification.registrationInfo;
 
-    // await pool.query('UPDATE profiles SET credentialPublicKey = $1, counter = $2, id = $3, transports = $4 WHERE username = $5',
-    //   [credentialPublicKey, counter, credentialID, transports, username]);
+    await pool.query('UPDATE profiles SET credentialPublicKey = $1, counter = $2, credentialID = $3, attestationobject = $4 WHERE username = $5',
+      [credentialPublicKey, counter, credentialID, attestationObject, username]);
   }
 
   res.status(200).json(verification);
