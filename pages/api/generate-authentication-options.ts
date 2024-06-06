@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const options = generateAuthenticationOptions({
     allowCredentials: [{
-      id: user.id,
+      id: user.credentialID,
       type: 'public-key',
     }],
   });
