@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   await pool.query(
-    `INSERT INTO users (username, displayName, credentialID, credentialPublicKey, counter, transports)
+    `INSERT INTO profiles (username, displayName, credentialID, credentialPublicKey, counter, transports)
      VALUES ($1, $2, '', '', 0, '{}')
      ON CONFLICT (username) DO NOTHING`,
     [username, displayName]
