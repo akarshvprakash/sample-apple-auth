@@ -38,8 +38,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Ensure user is saved in the database
     await pool.query(
-      `INSERT INTO profiles (username, displayName, credentialID, credentialPublicKey, counter, transports)
-       VALUES ($1, $2, '', '', 0, '{}')
+      `INSERT INTO profiles (username, displayName, credentialID, credentialPublicKey, counter, attestationobject)
+       VALUES ($1, $2, '', '', 0, '')
        ON CONFLICT (username) DO NOTHING`,
       [username, displayName]
     );
