@@ -19,13 +19,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const userID = encoder.encode(username);
 
     // Generate registration options
-    const options = generateRegistrationOptions({
+    const optionsPromise = generateRegistrationOptions({
       rpName: 'SimpleWebAuthn Demo',
       rpID: 'sample-apple-auth.vercel.app',
       userID,
       userName: username,
       userDisplayName: displayName,
     });
+
+    // Wait for the promise to resolve
+    const options = await optionsPromise;
 
     console.log('Generated registration options:', options);
 
