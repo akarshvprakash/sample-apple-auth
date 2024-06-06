@@ -17,21 +17,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   console.log("user", user)
   console.log("storedChallenge", storedChallenge)
 
-  // const verification = await verifyAuthenticationResponse({
-  //   response: body,
-  //   expectedChallenge: storedChallenge as string,
-  //   expectedOrigin: 'https://sample-apple-auth.vercel.app',
-  //   expectedRPID: 'sample-apple-auth.vercel.app',
-  //   authenticator: {
-  //     credentialPublicKey: user.credentialPublicKey,
-  //     counter: user.counter
-  //   },
-  // });
+  const verification = await verifyAuthenticationResponse({
+    response: body,
+    expectedChallenge: storedChallenge as string,
+    expectedOrigin: 'https://sample-apple-auth.vercel.app',
+    expectedRPID: 'sample-apple-auth.vercel.app',
+    authenticator: {
+      credentialPublicKey: user.credentialpublickey,
+      counter: user.counter
+    },
+  });
 
-
-  // if (verification.verified) {
-  //   await pool.query('UPDATE profiles SET counter = $1 WHERE credentialID = $2', [verification.authenticationInfo.newCounter, body.rawId]);
-  // }
+  if (verification.verified) {
+    await pool.query('UPDATE profiles SET counter = $1 WHERE credentialID = $2', [verification.authenticationInfo.newCounter, body.rawId]);
+  }
 
   res.status(200).json(verification);
 }
