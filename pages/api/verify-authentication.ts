@@ -3,6 +3,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { verifyAuthenticationResponse } from '@simplewebauthn/server';
 import pool from '../../lib/db';
+import { getCookie } from 'cookies-next'; // Using cookies-next for example
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { body } = req;
