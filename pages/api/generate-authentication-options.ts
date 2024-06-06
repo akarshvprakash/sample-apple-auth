@@ -10,16 +10,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   console.log("user.credentialid", user.credentialid)
 
-  const options = generateAuthenticationOptions({
+  const optionsPromise = generateAuthenticationOptions({
     allowCredentials: [{
       id: user.credentialid,
       type: 'public-key',
     }],
   });
 
-  // console.log("optionsPromise", optionsPromise)
+  console.log("optionsPromise", optionsPromise)
 
-  // const options = await optionsPromise;
+  // Wait for the promise to resolve
+  const options = await optionsPromise;
 
   console.log("options", options)
 
