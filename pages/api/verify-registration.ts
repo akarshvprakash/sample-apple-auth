@@ -5,19 +5,13 @@ import pool from '../../lib/db';
 import { getCookie } from 'cookies-next'; // Using cookies-next for example
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { username, id, rawId, response, type, clientExtensionResults } = req.body;
+  const { username, response } = req.body;
 
   // Retrieve the stored challenge from the cookie
   const storedChallenge = getCookie('registrationChallenge', { req, res });
 
   const verification = await verifyRegistrationResponse({
-    response: {
-      id,
-      rawId,
-      response,
-      type,
-      clientExtensionResults,
-    },
+    response: response,
     expectedChallenge: storedChallenge as string,
     expectedOrigin: 'https://sample-apple-auth.vercel.app',
     expectedRPID: 'sample-apple-auth.vercel.app',
