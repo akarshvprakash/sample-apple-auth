@@ -29,7 +29,7 @@ export default function Register() {
       await fetch('/api/verify-registration', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(registrationResponse),
+        body: JSON.stringify({username, registrationResponse}),
       });
 
       console.log('Registration successful');

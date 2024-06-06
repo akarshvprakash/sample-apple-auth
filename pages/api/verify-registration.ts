@@ -21,6 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (verification.verified && verification.registrationInfo) {
     const { username } = req.body;
     const { credentialPublicKey, counter, credentialID, attestationObject } = verification.registrationInfo;
+    console.log("username", username);
 
     await pool.query('UPDATE profiles SET credentialPublicKey = $1, counter = $2, credentialID = $3, attestationobject = $4 WHERE username = $5',
       [credentialPublicKey, counter, credentialID, attestationObject, username]);
