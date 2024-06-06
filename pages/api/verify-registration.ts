@@ -2,14 +2,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { verifyRegistrationResponse } from '@simplewebauthn/server';
 import pool from '../../lib/db';
+import { getCookie } from 'cookies-next'; // Using cookies-next for example
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { body } = req;
-  const expectedChallenge = ''; // Retrieve from database or session
+  // Retrieve the stored challenge from the cookie
+  const storedChallenge = getCookie('registrationChallenge', { req, res });
 
   const verification = await verifyRegistrationResponse({
     response: body,
-    expectedChallenge,
+    expectedChallenge: storedChallenge as string,
     expectedOrigin: 'https://sample-apple-auth.vercel.app',
     expectedRPID: 'sample-apple-auth.vercel.app',
   });

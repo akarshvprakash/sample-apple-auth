@@ -11,6 +11,7 @@
   "dependencies": {
     "@simplewebauthn/browser": "^10.0.0",
     "@simplewebauthn/server": "^10.0.0",
+    "cookies-next": "^4.2.1",
     "next": "14.2.3",
     "pg": "^8.12.0",
     "react": "^18",
