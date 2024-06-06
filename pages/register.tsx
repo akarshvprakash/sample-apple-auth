@@ -7,18 +7,35 @@ export default function Register() {
   const [displayName, setDisplayName] = useState('');
 
   const handleRegister = async () => {
-    const res = await fetch('/api/generate-registration-options', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, displayName }),
-    });
-    const options = await res.json();
-    const registrationResponse = await startRegistration(options);
-    await fetch('/api/verify-registration', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(registrationResponse),
-    });
+    try {
+      const res = await fetch('/api/generate-registration-options', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, displayName }),
+      });
+
+      if (!res.ok) {
+        console.error('Error generating registration options:', res.statusText);
+        return;
+      }
+
+      const options = await res.json();
+      if (!options || Object.keys(options).length === 0) {
+        console.error('Empty registration options received');
+        return;
+      }
+
+      const registrationResponse = await startRegistration(options);
+      await fetch('/api/verify-registration', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(registrationResponse),
+      });
+
+      console.log('Registration successful');
+    } catch (error) {
+      console.error('Error during registration:', error);
+    }
   };
 
   return (
@@ -43,3 +60,4 @@ export default function Register() {
     </div>
   );
 }
+

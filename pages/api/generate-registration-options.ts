@@ -6,6 +6,9 @@ import { TextEncoder } from 'util';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { username, displayName } = req.body;
 
+  console.log('Received username:', username);
+  console.log('Received displayName:', displayName);
+
   if (!username || !displayName) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
@@ -23,6 +26,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       userName: username,
       userDisplayName: displayName,
     });
+
+    console.log('Generated registration options:', options);
 
     // Ensure user is saved in the database
     await pool.query(
