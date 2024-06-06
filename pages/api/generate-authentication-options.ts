@@ -2,6 +2,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { generateAuthenticationOptions } from '@simplewebauthn/server';
 import pool from '../../lib/db';
+import { setCookie } from 'cookies-next'; // Using cookies-next for example
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { username } = req.body;
@@ -21,6 +22,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // Wait for the promise to resolve
   const options = await optionsPromise;
+
+  // Store challenge in a cookie (or any temporary storage)
+  setCookie('authenticationChallenge', options.challenge, { req, res, maxAge: 60 * 5 });
 
   console.log("options", options)
 
