@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link'
 import { startAuthentication } from '@simplewebauthn/browser';
 
 export default function Login() {
@@ -31,7 +32,7 @@ export default function Login() {
       <button onClick={handleLogin}>Login</button>
       <br />
       <br />
-      <a href="/register">go to register</a>
+      <Link href="/register">Go to register</Link>
     </div>
   );
 }

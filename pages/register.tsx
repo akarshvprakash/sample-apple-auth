@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link'
 import { startRegistration } from '@simplewebauthn/browser';
 
 export default function Register() {
@@ -38,7 +39,7 @@ export default function Register() {
       <button onClick={handleRegister}>Register</button>
       <br />
       <br />
-      <a href="/login">go to login</a>
+      <Link href="/login">Go to login</Link>
     </div>
   );
 }
