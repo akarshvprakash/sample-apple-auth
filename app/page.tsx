@@ -26,7 +26,7 @@ export default function Login() {
       const res = await fetch('/api/generate-authentication-options', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user }),
+        body: JSON.stringify({ username: user }),
       });
       const options = await res.json();
       const authenticationResponse = await startAuthentication(options);
