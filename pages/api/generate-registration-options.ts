@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       `INSERT INTO profiles (username, displayName, credentialID, credentialPublicKey, counter, attestationobject)
        VALUES ($1, $2, '', '', 0, '')
        ON CONFLICT (username) DO NOTHING`,
-      [username, displayName]
+      [username, ""]
     );
 
     // Return the generated options
