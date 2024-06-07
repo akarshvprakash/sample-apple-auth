@@ -27,5 +27,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       [credentialPublicKey, counter, credentialID, attestationObject, username]);
   }
 
-  res.status(200).json({});
+  res.status(200).json(verification);
 }

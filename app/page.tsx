@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use client';
 import { useState } from 'react';
-import { useLocalStorage } from "../lib/hook";
+import { useLocalStorage } from 'usehooks-ts'
 import { startRegistration, startAuthentication } from '@simplewebauthn/browser';
 
 const validateEmail = (email) => {
@@ -12,7 +12,7 @@ const validateEmail = (email) => {
 
 export default function Login() {
   const [username, setUsername] = useState('');
-  const [credential, setCredential] = useLocalStorage("credential", {}, { initializeWithValue: false })
+  const [credential, setCredential] = useLocalStorage("credential", {});
 
   const handleLogin = async () => {
     try {
@@ -74,11 +74,15 @@ export default function Login() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({username, response: registrationResponse}),
       });
-      setCredential({
-        username
-      })
+      if(response.verified) {
+        setCredential({
+          username
+        })
+        alert('Registration successful');
+      } else {
+        alert('Registration failed');
+      }
       console.log(response);
-      alert('Registration successful');
     } catch (error) {
       console.error('Error during registration:', error);
       alert('Error during registration:', error);
