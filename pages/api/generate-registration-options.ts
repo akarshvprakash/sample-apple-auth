@@ -24,8 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       rpName: 'SimpleWebAuthn Demo',
       rpID: 'sample-apple-auth.vercel.app',
       userID,
-      userName: username,
-      userDisplayName: displayName,
+      userName: username
     });
 
     // Wait for the promise to resolve
