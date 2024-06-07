@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use client';
 import { useState } from 'react';
-import { useLocalStorage } from "@uidotdev/usehooks";
+import { useLocalStorage } from "../lib/hook";
 import { startRegistration, startAuthentication } from '@simplewebauthn/browser';
 
 const validateEmail = (email) => {
