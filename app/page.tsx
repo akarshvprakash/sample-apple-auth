@@ -74,7 +74,10 @@ export default function Login() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({username, response: registrationResponse}),
       });
-      if(response.verified) {
+
+      const results = await response.json();
+
+      if(results.verified) {
         setCredential({
           username
         })
