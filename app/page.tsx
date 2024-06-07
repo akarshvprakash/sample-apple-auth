@@ -35,8 +35,14 @@ export default function Login() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(authenticationResponse),
       });
-      console.log(response);
-      alert('Authetication successful');
+      
+      const results = await response.json();
+      console.log(results);
+      if(results.verified) {
+        alert('Authetication successful');
+      } else {
+        alert('Authetication failed');
+      }
     } catch (error) {
       console.error('Error during authetication:', error);
       alert('Error during authetication:', error);
@@ -85,7 +91,7 @@ export default function Login() {
       } else {
         alert('Registration failed');
       }
-      console.log(response);
+      console.log(results);
     } catch (error) {
       console.error('Error during registration:', error);
       alert('Error during registration:', error);

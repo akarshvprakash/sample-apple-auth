@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     response: body,
     expectedChallenge: storedChallenge as string,
     expectedOrigin: 'https://appleauth.vercel.app',
-    expectedRPID: 'appleauth.vercel.app',
+    expectedRPID: 'appleauth.vercel.app1',
     authenticator: {
       credentialPublicKey: user.credentialpublickey,
       counter: user.counter
