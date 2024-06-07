@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   console.log('Received username:', username);
   console.log('Received displayName:', displayName);
 
-  if (!username || !displayName) {
+  if (!username) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
