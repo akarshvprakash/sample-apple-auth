@@ -13,8 +13,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const verification = await verifyRegistrationResponse({
     response: response,
     expectedChallenge: storedChallenge as string,
-    expectedOrigin: 'https://sample-apple-auth.vercel.app',
-    expectedRPID: 'sample-apple-auth.vercel.app',
+    expectedOrigin: 'https://appleauth.vercel.app',
+    expectedRPID: 'appleauth.vercel.app',
   });
 
   console.log("verification", verification);

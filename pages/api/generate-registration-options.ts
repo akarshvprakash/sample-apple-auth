@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Generate registration options
     const optionsPromise = generateRegistrationOptions({
       rpName: 'SimpleWebAuthn Demo',
-      rpID: 'sample-apple-auth.vercel.app',
+      rpID: 'appleauth.vercel.app',
       userID,
       userName: username
     });
