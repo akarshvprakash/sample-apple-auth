@@ -17,7 +17,7 @@ export default function Login() {
   const handleLogin = async () => {
     try {
 
-      const { username: user } = credential; 
+      const { username: user, credentialId } = credential; 
 
       if(!user || !validateEmail(user)) {
         alert("email id is not valid");
@@ -30,7 +30,26 @@ export default function Login() {
       });
       const options = await res.json();
       console.log("generate-authentication-options", options)
-      const authenticationResponse = await startAuthentication(options);
+
+      const { challenge } = options;
+      const challengeBuffer = encoder.encode(challenge);
+
+      const credentialIdBuffer = encoder.encode(credentialId);
+
+      const authenticationOptions = {
+        publicKey: {
+            challenge: challengeBuffer,
+            allowCredentials: [{
+                type: "public-key",
+                id: credentialIdBuffer,
+                transports: ["internal"]
+            }],
+          userVerification: 'required'
+        }
+      };
+
+      const authenticationResponse = await navigator.credentials.get(authenticationOptions);//await startAuthentication(options);
+
       const response = await fetch('/api/verify-authentication', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -52,6 +71,18 @@ export default function Login() {
 
   const handleRegister = async () => {
     try {
+
+      const isAvailable = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+
+      if(!isAvailable) {
+        alert("feature not available");
+        return;
+      } else {
+        if (confirm("Do you want to enable face id?")) {
+        } else {
+          return;
+        }
+      }
 
       if(!username || !validateEmail(username)) {
         alert("Enter a valid email id");
@@ -75,8 +106,28 @@ export default function Login() {
         console.error('Empty registration options received');
         return;
       }
+      const { rp, challenge, user } = options;
+      const challengeBuffer = encoder.encode(challenge);
+      const registrationOptions = {
+        publicKey: {
+            rp,
+            user: {
+                name: user.name,
+                id: encoder.encode(user.id),
+                displayName: user.displayName
+            },
+            pubKeyCredParams: [{ type: "public-key", alg: -7 }],
+            challenge: challengeBuffer,
+            authenticatorSelection: {
+              authenticatorAttachment: 'platform'
+            },
+            attestation: "none"
+        }
+    };
 
-      const registrationResponse = await startRegistration(options);
+    const registrationResponse = await navigator.credentials.create(registrationOptions);//await startRegistration(options);
+
+
       const response = await fetch('/api/verify-registration', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -87,7 +138,8 @@ export default function Login() {
 
       if(results.verified) {
         setCredential({
-          username
+          username,
+          credentialId: registrationResponse.id
         })
         alert('Registration successful');
       } else {
