@@ -2,7 +2,8 @@
 'use client';
 import { useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts'
-import { startRegistration, startAuthentication } from '@simplewebauthn/browser';
+const encoder = new TextEncoder();
+
 
 const validateEmail = (email) => {
   return email.match(
