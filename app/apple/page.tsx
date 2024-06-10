@@ -126,7 +126,10 @@ export default function Login() {
         }
     };
 
-    const registrationResponse = await navigator.credentials.create(registrationOptions);//await startRegistration(options);
+    const registrationResponse = await navigator.credentials.create(registrationOptions);
+    const sample = await startRegistration(options);;
+    console.log("sample", sample);
+    console.log("registrationResponse", registrationResponse);
 
 
       const response = await fetch('/api/verify-registration', {
